@@ -14,7 +14,11 @@
   "keywords": [
     "javascript",
     "log",
-    "logger"
+    "logger",
+    "logging",
+    "bunyan",
+    "pino",
+    "loglevel"
   ],
   "dependencies": {
     "ansi-colors": "^3.2.3",

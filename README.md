@@ -98,8 +98,10 @@ ___
 - [Formatters](#formatters)
   - [Using formatters](#using-formatters)
   - [Formatter propagation](#formatter-propagation)
-  - [Build-in formatters](#build-in-formatters)    
-
+  - [Build-in formatters](#build-in-formatters)  
+- [Appenders](#appenders)    
+  - [Core Appenders](#core-appenders)
+  - [Creating custom appender](#creating-custom-appender)
 ___
 
 ## Logger
@@ -524,7 +526,17 @@ logger.info('Hello world');
 Hixtory has many [built-in](docs/builtin-formatters.md) formatter functions to help you writing logs with desired format. All build-in formatters can be accessed within `Hixtory.formatters`.
 You can check additional [Built-in Formatters](docs/builtin-formatters.md) documentation for details.
 
-<hr/>
+
+
+
+
+## Appenders
+
+### Core Appenders 
+
+### Creating custom appender
+
+---
 
 ## Node Compatibility
 
