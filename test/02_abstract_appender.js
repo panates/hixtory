@@ -62,10 +62,10 @@ describe('Appender', function() {
     const mock = new MockAppender();
     mock._attach();
     return mock.close().then(() => {
-      assert(!mock._writableState.destroyed);
+      assert(!mock._writableState.finished);
       mock._detach();
       return mock.close(() => {
-        assert(mock._writableState.destroyed);
+        assert(mock._writableState.finished);
       });
     });
   });
