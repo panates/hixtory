@@ -402,7 +402,7 @@ describe('Logger', function() {
       child.targets.console.appender = null;
       assert.strictEqual(child.targets.console.appender, logger.targets.console.appender);
       child.targets.console.enabled = null;
-      assert.notStrictEqual(child.targets.console.enabled, true);
+      assert.strictEqual(child.targets.console.enabled, true);
       child.targets.console.filter = null;
       assert.strictEqual(child.targets.console.filter, null);
       child.targets.console.filter = undefined;
@@ -470,6 +470,7 @@ describe('Logger', function() {
       for (const level of config.hixtory.levels) {
         const message = 'Log ' + ++i;
         logger.log(level, message);
+        assert(mock.lastChunk);
         assert.strictEqual(mock.lastChunk.level, level);
         assert.strictEqual(mock.lastChunk.message, message);
         assert.strictEqual(mock.lastChunk.id, 1);
