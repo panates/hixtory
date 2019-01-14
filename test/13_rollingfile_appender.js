@@ -23,7 +23,8 @@ describe('RollingFileAppender', function() {
     appender._attach();
     appender._detach();
     return appender.close().then(() => {
-      assert.strictEqual(appender._stream._writableState.destroyed, true);
+      assert.strictEqual(appender.closing, false);
+      assert.strictEqual(appender.closed, true);
     });
   });
 

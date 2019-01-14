@@ -6,6 +6,7 @@ const clr = require('ansi-colors');
 const Hixtory = require('../');
 const MockAppender = require('./support/MockAppender');
 const {formatters} = Hixtory;
+const fecha = require('fecha');
 
 assert.rejects = assert.rejects || rejects;
 assert.doesNotReject = assert.doesNotReject || doesNotReject;
@@ -386,7 +387,9 @@ describe('Formatters', function() {
           id: (v) => ' ID:' + v
         })
       ]);
-      assert.deepStrictEqual(appender.lastChunk, 'LBL:label1 LVL:info [20190111] Any message ID:1');
+      const ds = fecha.format(new Date(), 'YYYYMMDD');
+      assert.deepStrictEqual(appender.lastChunk, 'LBL:label1 LVL:info [' + ds +
+          '] Any message ID:1');
     });
 
     it('should print additional data as json object', function() {

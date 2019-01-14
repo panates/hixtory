@@ -206,7 +206,7 @@ describe('Logger', function() {
         }
       });
       child.removeTarget('console');
-      assert.strictEqual(appender._state, 'idle');
+      assert.strictEqual(appender.closed, false);
       logger.removeTarget('console');
       logger.removeTarget('unknown');
       assert(!logger.targets.console);

@@ -27,7 +27,7 @@ describe('StreamAppender', function() {
   it('should close()', function() {
     const appender = new StreamAppender({stream});
     return appender.close().then(() => {
-      assert.strictEqual(stream._writableState.destroyed, true);
+      assert.strictEqual(stream._writableState.finished, true);
     });
   });
 
