@@ -415,6 +415,33 @@ describe('Logger', function() {
       assert.strictEqual(child.targets.console.level, logger.targets.console.level);
     });
 
+    it('should LogTarget not emit "changed" event if property value is same', function() {
+      const logger = createLogger({
+        targets: {
+          console: {
+            appender: new appenders.ConsoleAppender(),
+            level: 'debug',
+            filter: () => true,
+            format: () => true
+          }
+        }
+      });
+      const trg = logger.targets.console;
+      let i = 0;
+      trg.on('change', ()=>i++);
+      // noinspection SillyAssignmentJS
+      trg.level = trg.level;
+      // noinspection SillyAssignmentJS
+      trg.appender = trg.appender;
+      // noinspection SillyAssignmentJS
+      trg.enabled = trg.enabled;
+      // noinspection SillyAssignmentJS
+      trg.filter = trg.filter;
+      // noinspection SillyAssignmentJS
+      trg.format = trg.format;
+      assert.strictEqual(i, 0);
+    });
+
     it('should update after reconfigure parent', function() {
       const logger = createLogger({
         levels: 'npm',
@@ -482,6 +509,9 @@ describe('Logger', function() {
       logger.error(new Error('Any error message'));
       assert.strictEqual(mock.lastChunk.message, 'Any error message');
       assert(mock.lastChunk.stack);
+      assert.strictEqual(mock.lastChunk.id, 1);
+      logger.info({message: 'Any message', id: 1});
+      assert.strictEqual(mock.lastChunk.message, 'Any message');
       assert.strictEqual(mock.lastChunk.id, 1);
     });
 

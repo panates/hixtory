@@ -276,7 +276,7 @@ describe('Formatters', function() {
       });
     });
 
-    it('should ignore property if not string', function() {
+    it('should ignore property if not a string', function() {
       appender.append(null, {
         prop1: 'word '.repeat(10).trim(),
         prop2: 123,
@@ -292,6 +292,11 @@ describe('Formatters', function() {
     it('should wrap if output is string', function() {
       appender.append(null, 'word word word word word word word word word word', formatters.wordWrap(20));
       assert.deepStrictEqual(appender.lastChunk, 'word word word word\nword word word word\nword word');
+    });
+
+    it('should not wrap maxLen=0', function() {
+      appender.append(null, 'word word word word word word word word word word', formatters.wordWrap(0));
+      assert.deepStrictEqual(appender.lastChunk, 'word word word word word word word word word word');
     });
 
   });
@@ -380,11 +385,13 @@ describe('Formatters', function() {
       }, [
         formatters.timestamp('YYYYMMDD'),
         formatters.print({
-          label: ' LBL:%s',
-          level: ' LVL:%s',
-          timestamp: ' [%s]',
-          message: ' %s',
-          id: (v) => ' ID:' + v
+          fields: {
+            label: ' LBL:%s',
+            level: ' LVL:%s',
+            timestamp: ' [%s]',
+            message: ' %s',
+            id: (v) => ' ID:' + v
+          }
         })
       ]);
       const ds = fecha.format(new Date(), 'YYYYMMDD');
@@ -406,13 +413,21 @@ describe('Formatters', function() {
         level: 'info',
         message: 'Any message',
         id: 1
-      }, formatters.print(null, {strict: true}));
+      }, formatters.print({strict: true}));
       assert.deepStrictEqual(appender.lastChunk, '[info] Any message');
     });
 
     it('should ignore if output is not an object', function() {
       appender.append(null, 'abcd', [formatters.print()]);
       assert.deepStrictEqual(appender.lastChunk, 'abcd');
+    });
+
+    it('should print error stack', function() {
+      const e = new Error('Any message');
+      e.stack = '[error stack]';
+      e.level = 'error';
+      appender.append(null, e, formatters.print({printErrorStack: true}));
+      assert(appender.lastChunk.includes('[error stack]'));
     });
 
   });
@@ -458,6 +473,21 @@ describe('Formatters', function() {
       assert.deepStrictEqual(appender.lastChunk, '[\u001b[94m2019-01-01\u001b[39m][INFO][\u001b[36m\u001b[3mlabel\u001b[23m\u001b[39m] Any message');
     });
 
+    it('should disable formatters', function() {
+      appender.append(null, {
+        level: 'info',
+        label: 'label',
+        message: 'Any message\nline2'
+      }, formatters.printConsole({
+        timestamp: false,
+        colorize: false,
+        upperCase: false,
+        wordWrap: false,
+        indent: false
+      }));
+      assert.deepStrictEqual(appender.lastChunk, '[info][label] Any message\nline2');
+    });
+
   });
 
   describe('printFile formatter', function() {
@@ -470,6 +500,21 @@ describe('Formatters', function() {
         message: 'Any message'
       }, formatters.printFile());
       assert.deepStrictEqual(appender.lastChunk, '[2019-01-01][INFO][label] Any message');
+    });
+
+    it('should disable formatters', function() {
+      appender.append(null, {
+        level: 'info',
+        label: 'label',
+        message: 'Any message\nline2'
+      }, formatters.printFile({
+        timestamp: false,
+        colorize: false,
+        upperCase: false,
+        wordWrap: false,
+        indent: false
+      }));
+      assert.deepStrictEqual(appender.lastChunk, '[info][label] Any message\nline2');
     });
 
   });
