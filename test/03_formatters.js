@@ -430,6 +430,14 @@ describe('Formatters', function() {
       assert(appender.lastChunk.includes('[error stack]'));
     });
 
+    it('should printErrorStack can be a function', function() {
+      const e = new Error('Any message');
+      e.stack = '[error stack]';
+      e.level = 'error';
+      appender.append(null, e, formatters.print({printErrorStack: () => true}));
+      assert(appender.lastChunk.includes('[error stack]'));
+    });
+
   });
 
   describe('printJson formatter', function() {
