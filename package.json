@@ -1,7 +1,7 @@
 {
   "name": "hixtory",
   "description": "Most flexible and fast logging library for NodeJS",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": "Panates Ltd.",
   "contributors": [
     "Eray Hanoglu <e.hanoglu@panates.com>"
