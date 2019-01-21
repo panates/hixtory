@@ -417,6 +417,15 @@ describe('Formatters', function() {
       assert.deepStrictEqual(appender.lastChunk, '[info] Any message');
     });
 
+    it('should not print non plain object properties of metadata', function() {
+      appender.append(null, {
+        level: 'info',
+        message: 'Any message',
+        ignorethis: new Map()
+      }, formatters.print());
+      assert.deepStrictEqual(appender.lastChunk, '[info] Any message');
+    });
+
     it('should ignore if output is not an object', function() {
       appender.append(null, 'abcd', [formatters.print()]);
       assert.deepStrictEqual(appender.lastChunk, 'abcd');
