@@ -100,7 +100,6 @@ ___
   - [Formatter propagation](#formatter-propagation)
   - [Build-in formatters](#build-in-formatters)  
 - [Appenders](#appenders)    
-  - [Core Appenders](#core-appenders)
   - [Creating custom appender](#creating-custom-appender)
 ___
 
@@ -532,9 +531,52 @@ You can check additional [Built-in Formatters](docs/builtin-formatters.md) docum
 
 ## Appenders
 
-### Core Appenders 
+Appenders are responsible for delivering log events to their destination. There are several [appenders](docs/appenders.md) available. `Hixtory` already accepts any [Writable](https://nodejs.org/api/stream.html#stream_writable_streams) instance as an appender. 
 
 ### Creating custom appender
+
+Every Appender must implement [Writable](https://nodejs.org/api/stream.html#stream_writable_streams) interface.
+
+However Hixtory exposes an abstract `Appender` class and core Appender classes to extend which is suggested for Appender developers. 
+
+```javascript
+const {Appender} = require('hixtory');
+class MyConsoleAppender extends Appender {
+  _write(chunk, encoding, callback) {
+    try {
+      const data = typeof chunk === 'object' ?
+          JSON.stringify(chunk) : chunk;
+      console.log(data);
+    } finally {
+      callback();
+    }
+  }
+}
+```
+
+```javascript
+const {appenders} = require('hixtory');
+class RollingFileAppender extends appenders.StreamAppender {
+  // This is called when appenders needs to create nested stream
+  _createStream() {
+    const options = this._options;
+    return new RollingFileStream(
+        options.filename,
+        options.maxSize,
+        options.numBackups, {
+          compress: options.compress,
+          keepFileExt: true
+        });
+  }
+  // This is called when appender needs to transform data
+  _transform(chunk) {
+    return (typeof chunk === 'object' ?
+        JSON.stringify(chunk, null, 2) : chunk) +
+        /* istanbul ignore next */
+        (process.platform === 'win32' ? '\r\n' : '\n');
+  }
+}
+```
 
 ---
 

@@ -77,7 +77,7 @@ describe('DateFileAppender', function() {
     const appender = new DateFileAppender({
       filename,
       alwaysIncludePattern: true,
-      pattern: 'YYYYMMDD'
+      pattern: 'yyyyMMdd'
     });
     appender._attach();
     appender.append(null, 'text');
