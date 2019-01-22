@@ -547,17 +547,17 @@ You can check additional [Built-in Formatters](docs/builtin-formatters.md) docum
 
 [npm-image]: https://img.shields.io/npm/v/hixtory.svg
 [npm-url]: https://npmjs.org/package/hixtory
-[travis-image]: https://img.shields.io/travis/panates/hixtory/master.svg
-[travis-url]: https://travis-ci.org/panates/hixtory
-[coveralls-image]: https://img.shields.io/coveralls/panates/hixtory/master.svg
-[coveralls-url]: https://coveralls.io/r/panates/hixtory
+[travis-image]: https://img.shields.io/travis/hixtory/hixtory/master.svg
+[travis-url]: https://travis-ci.org/hixtory/hixtory
+[coveralls-image]: https://img.shields.io/coveralls/hixtory/hixtory/master.svg
+[coveralls-url]: https://coveralls.io/r/hixtory/hixtory
 [downloads-image]: https://img.shields.io/npm/dm/hixtory.svg
 [downloads-url]: https://npmjs.org/package/hixtory
-[gitter-image]: https://badges.gitter.im/panates/hixtory.svg
-[gitter-url]: https://gitter.im/panates/hixtory?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[dependencies-image]: https://david-dm.org/panates/hixtory/status.svg
-[dependencies-url]:https://david-dm.org/panates/hixtory
-[devdependencies-image]: https://david-dm.org/panates/hixtory/dev-status.svg
-[devdependencies-url]:https://david-dm.org/panates/hixtory?type=dev
+[gitter-image]: https://badges.gitter.im/hixtory/hixtory.svg
+[gitter-url]: https://gitter.im/hixtory/hixtory?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[dependencies-image]: https://david-dm.org/hixtory/hixtory/status.svg
+[dependencies-url]:https://david-dm.org/hixtory/hixtory
+[devdependencies-image]: https://david-dm.org/hixtory/hixtory/dev-status.svg
+[devdependencies-url]:https://david-dm.org/hixtory/hixtory?type=dev
 [quality-image]: http://npm.packagequality.com/shield/hixtory.png
 [quality-url]: http://packagequality.com/#?package=hixtory
