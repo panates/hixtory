@@ -440,15 +440,15 @@ describe('Formatters', function() {
       const e = new Error('Any message');
       e.stack = '[error stack]';
       e.level = 'error';
-      appender.append(null, e, formatters.print({printErrorStack: true}));
+      appender.append(null, e, formatters.print({errorStack: true}));
       assert(appender.lastChunk.includes('[error stack]'));
     });
 
-    it('should printErrorStack can be a function', function() {
+    it('should errorStack can be a function', function() {
       const e = new Error('Any message');
       e.stack = '[error stack]';
       e.level = 'error';
-      appender.append(null, e, formatters.print({printErrorStack: () => true}));
+      appender.append(null, e, formatters.print({errorStack: () => true}));
       assert(appender.lastChunk.includes('[error stack]'));
     });
 
