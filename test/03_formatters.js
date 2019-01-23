@@ -399,12 +399,17 @@ describe('Formatters', function() {
           '] Any message ID:1');
     });
 
-    it('should print additional data as json object', function() {
-      appender.append(null, {
+    it('should print additional enumerable properties', function() {
+      const data = {
         level: 'info',
         message: 'Any message',
         id: 1
-      }, formatters.print());
+      };
+      Object.defineProperty(data, '_ignore', {
+        enumerable: false,
+        value: 1
+      });
+      appender.append(null, data, formatters.print());
       assert.deepStrictEqual(appender.lastChunk, '[info] Any message\n{"id":1}');
     });
 
