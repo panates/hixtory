@@ -491,7 +491,7 @@ describe('Formatters', function() {
         level: 'info',
         label: 'label',
         message: 'Any message'
-      }, formatters.printConsole());
+      }, formatters.printConsole({wordWrap: 160}));
       assert.deepStrictEqual(appender.lastChunk, '[\u001b[94m2019-01-01\u001b[39m][INFO][\u001b[36m\u001b[3mlabel\u001b[23m\u001b[39m] Any message');
     });
 
