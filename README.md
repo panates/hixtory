@@ -12,7 +12,7 @@
 ## Motivation
 
 'hixtory' is design to be a flexible, fast and extensible universal logging library with multiple appenders.
-There is many good logging libraries on the market like `winston` and `log4js`. Why did we created a new one? Answer is simple, they are not enough for our needs. We created `hixtory` to use in our enterprise level projects as logging core.
+There are many good logging libraries on the market like `winston` and `log4js`. Why did we created a new one? Answer is simple, they are not enough for our needs. We created `hixtory` to use in our enterprise level projects as logging core.
 
 The key point of `hixtory` is maximum flexibility, which needs by multi modular applications like micro service SaaS servers.
 
