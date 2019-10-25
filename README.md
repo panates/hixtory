@@ -582,7 +582,7 @@ class RollingFileAppender extends appenders.StreamAppender {
 
 ## Node Compatibility
 
-  - node `>= 6.x`;
+  - node `>= 8.x`;
   
 ### License
 [MIT](LICENSE)
